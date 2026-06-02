@@ -52,6 +52,12 @@ export default function TasksPage() {
         data: { user },
       } = await supabase.auth.getUser();
 
+      if (!user) {
+        alert("Please login again");
+        window.location.href = "/login";
+        return;
+      }
+
       const { error } = await supabase.from("tasks").insert([
         {
           title: task,
